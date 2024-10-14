@@ -29,7 +29,6 @@ public class Evento {
         }
     }
 
-    // Getters e Setters
     public String getNome() {
         return nome;
     }
