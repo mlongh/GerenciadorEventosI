@@ -3,12 +3,14 @@ package evento;
 import java.util.Date;
 import java.util.List;
 
+import participante.Participante;
+
 public class Palestra extends Evento {
-    private String palestrante;
+    private Participante palestrante;
     private int duracao;
     private List<String> temas;
 
-    public Palestra(String nome, Date data, String local, int capacidadeMaxima, String palestrante, int duracao, List<String> temas) {
+    public Palestra(String nome, Date data, String local, int capacidadeMaxima, Participante palestrante, int duracao, List<String> temas) {
         super(nome, data, local, capacidadeMaxima);
         this.palestrante = palestrante;
         this.duracao = duracao;
@@ -16,11 +18,11 @@ public class Palestra extends Evento {
         this.adicionarParticipante(palestrante);
     }
 
-    public String getPalestrante() {
+    public Participante getPalestrante() {
         return palestrante;
     }
 
-    public void setPalestrante(String palestrante) {
+    public void setPalestrante(Participante palestrante) {
         this.palestrante = palestrante;
     }
 
