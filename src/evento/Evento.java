@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import participante.Participante;
+
 public class Evento {
     private String nome;
     private Date data;
     private String local;
     private int capacidadeMaxima;
-    private List<String> participantes;
+    private List<Participante> participantes;
 
     public Evento(String nome, Date data, String local, int capacidadeMaxima) {
         this.nome = nome;
@@ -19,7 +21,7 @@ public class Evento {
         this.participantes = new ArrayList<>();
     }
 
-    public boolean adicionarParticipante(String participante) {
+    public boolean adicionarParticipante(Participante participante) {
         if (participantes.size() < capacidadeMaxima) {
             participantes.add(participante);
             return true;
@@ -61,7 +63,7 @@ public class Evento {
         this.capacidadeMaxima = capacidadeMaxima;
     }
 
-    public List<String> getParticipantes() {
+    public List<Participante> getParticipantes() {
         return participantes;
     }
 }
