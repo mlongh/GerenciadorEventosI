@@ -60,4 +60,12 @@ public class Evento {
 			System.out.println("Capacidade máxima atingida.");
 		}
 	}
+
+	public void removerParticipante(Participante participante) {
+		if (participantes.contains(participante)) {
+			participantes.remove(participante);
+		} else {
+			System.out.println("Participante não encontrado.");
+		}
+	}
 }
