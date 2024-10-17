@@ -2,7 +2,6 @@ package evento;
 
 import java.util.Date;
 import java.util.List;
-
 import participante.Participante;
 
 public class Palestra extends Evento {
@@ -11,7 +10,7 @@ public class Palestra extends Evento {
     private List<String> temas;
 
     public Palestra(String nome, Date data, String local, int capacidadeMaxima, Participante palestrante, int duracao, List<String> temas) {
-        super(nome, data, local, capacidadeMaxima);
+        super(nome, data, local, capacidadeMaxima, palestrante.getNome());
         this.palestrante = palestrante;
         this.duracao = duracao;
         this.temas = temas;
