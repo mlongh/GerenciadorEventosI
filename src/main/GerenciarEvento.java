@@ -39,6 +39,7 @@ public class GerenciarEvento {
                     adicionarParticipante();
                     break;
                 case 3:
+                    listarEventos();
                     break;
                 case 4:
                     System.out.println("Saindo do sistema...");
@@ -197,5 +198,38 @@ public class GerenciarEvento {
 
         evento.adicionarParticipante(novoParticipante);
         System.out.println("Participante adicionado com sucesso ao evento " + evento.getNome() + ".");
+    }
+
+    private static void listarEventos() {
+        if (eventos.isEmpty()) {
+            System.out.println("Nenhum evento cadastrado.");
+        } else {
+            for (Evento evento : eventos) {
+                System.out.println("--- Evento:")
+                System.out.println("Nome: " + evento.getNome());
+                System.out.println("Data: " + evento.getData());
+                System.out.println("Local: " + evento.getLocal());
+                System.out.println("Capacidade Máxima: " + evento.getCapacidadeMaxima());
+                System.out.println("Participantes: " + evento.getParticipantes().size());
+
+                if (evento instanceof Workshop) {
+                    Workshop workshop = (Workshop) evento;
+                    
+                    System.out.println("--- Esse evento é do tipo Workshop")
+                    System.out.println("Instrutor: " + workshop.getInstrutor());
+                    System.out.println("Carga Horária: " + workshop.getCargaHoraria());
+                    System.out.println("Materiais Necessários: " + String.join(", ", workshop.getMateriaisNecessarios()));
+                } else if (evento instanceof Palestra) {
+                    Palestra palestra = (Palestra) evento;
+
+                    System.out.println("--- Esse evento é do tipo Palestra")
+                    System.out.println("Palestrante: " + palestra.getPalestrante().getNome());
+                    System.out.println("Duração: " + palestra.getDuracao());
+                    System.out.println("Temas: " + String.join(", ", palestra.getTemas()));
+                }
+
+                System.out.println("-----------------------------");
+            }
+        }
     }
 }
