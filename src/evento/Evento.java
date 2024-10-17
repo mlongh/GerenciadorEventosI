@@ -25,6 +25,7 @@ public class Evento {
         this.local = local;
         this.capacidadeMaxima = capacidadeMaxima;
         this.organizador = organizador;
+        this.organizador = organizador;
         this.participantes = new ArrayList<>();
     }
 
@@ -50,10 +51,24 @@ public class Evento {
 
     public void setOrganizador(String organizador) {
         this.organizador = organizador;
+    public String getOrganizador() {
+        return organizador;
+    }
+
+    public void setOrganizador(String organizador) {
+        this.organizador = organizador;
     }
 
     public List<Participante> getParticipantes() {
         return participantes;
+    }
+
+    public void adicionarParticipante(Participante participante) {
+        if (participantes.size() < capacidadeMaxima) {
+            participantes.add(participante);
+        } else {
+            System.out.println("Capacidade máxima atingida.");
+        }
     }
 
     public void adicionarParticipante(Participante participante) {
