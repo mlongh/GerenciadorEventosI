@@ -7,16 +7,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+
 import evento.Evento;
 import evento.Evento.TipoEvento;
 import evento.Palestra;
 import evento.Workshop;
+
 import participante.Participante;
 import participante.Participante.TipoParticipante;
 
+
 public class GerenciarEvento {
     private static Scanner scanner = new Scanner(System.in);
-    private static List<Evento> eventos = new ArrayList<>(); // Lista de eventos
+    private static List<Evento> eventos = new ArrayList<>();
 
     public static void main(String[] args) {
         int opcao = 0;
@@ -55,10 +58,10 @@ public class GerenciarEvento {
         String nome = scanner.nextLine();
 
         System.out.print("Data do evento (dd/MM/yyyy): ");
-        String dataStr = scanner.nextLine();
+        String dataEntrada = scanner.nextLine();
         Date data = null;
         try {
-            data = new SimpleDateFormat("dd/MM/yyyy").parse(dataStr);
+            data = new SimpleDateFormat("dd/MM/yyyy").parse(dataEntrada);
         } catch (ParseException e) {
             System.out.println("Data no formato inválido. Usando data atual.");
             data = new Date();
@@ -177,7 +180,7 @@ public class GerenciarEvento {
         }
 
         int eventoEscolhido = scanner.nextInt() - 1;
-        scanner.nextLine(); // Consome a linha
+        scanner.nextLine();
 
         if (eventoEscolhido < 0 || eventoEscolhido >= eventos.size()) {
             System.out.println("Evento inválido.");
