@@ -29,7 +29,8 @@ public class GerenciarEvento {
             System.out.println("2. Adicionar Participante");
             System.out.println("3. Listar Eventos");
             System.out.println("4. Gerenciar Reservas");
-            System.out.println("5. Sair");
+            System.out.println("5. Relatórios");
+            System.out.println("6. Sair");
             System.out.print("Escolha uma opção: ");
 
             opcao = scanner.nextInt();
@@ -49,12 +50,15 @@ public class GerenciarEvento {
                     gerenciarReservas();
                     break;
                 case 5:
+                    mostrarMenuRelatorios();
+                    break;
+                case 6:
                     System.out.println("Saindo do sistema...");
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
-        } while (opcao != 5);
+        } while (opcao != 6);
     }
 
     private static void gerenciarReservas() {
@@ -80,6 +84,34 @@ public class GerenciarEvento {
                 break;
             case 4:
                 filtrarEventos();
+                break;
+            default:
+                System.out.println("Opção inválida.");
+        }
+    }
+
+    public static void mostrarMenuRelatorios() {
+        System.out.println("---- Relatórios ----");
+        System.out.println("1. Relatório de eventos e quantidade de participantes");
+        System.out.println("2. Listar todos os participantes de um evento");
+        System.out.println("3. Listar participantes VIP de um evento");
+        System.out.println("4. Voltar");
+
+        int opcaoRelatorio = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (opcaoRelatorio) {
+            case 1:
+                gerarRelatorioEventos();
+                break;
+            case 2:
+                listarParticipantesEvento();
+                break;
+            case 3:
+                listarParticipantesVIPEvento();
+                break;
+            case 4:
+                System.out.println("Voltando ao menu principal...");
                 break;
             default:
                 System.out.println("Opção inválida.");
@@ -435,6 +467,92 @@ public class GerenciarEvento {
                 }
 
                 System.out.println("-----------------------------");
+            }
+        }
+    }
+
+    public static void gerarRelatorioEventos() {
+        if (eventos.isEmpty()) {
+            System.out.println("Nenhum evento cadastrado.");
+        } else {
+            System.out.println("Relatório de eventos cadastrados e quantidade de participantes:");
+            for (Evento evento : eventos) {
+                System.out.println("Evento: " + evento.getNome() + " - Data: " + evento.getData());
+                System.out.println("Local: " + evento.getLocal());
+                System.out.println("Capacidade Máxima: " + evento.getCapacidadeMaxima());
+                System.out.println("Participantes inscritos: " + evento.getParticipantes().size());
+                System.out.println("-------------------------------");
+            }
+        }
+    }
+
+    public static void listarParticipantesEvento() {
+        if (eventos.isEmpty()) {
+            System.out.println("Nenhum evento cadastrado.");
+            return;
+        }
+
+        System.out.println("Escolha o evento para listar os participantes:");
+        for (int i = 0; i < eventos.size(); i++) {
+            System.out.println((i + 1) + ". " + eventos.get(i).getNome());
+        }
+
+        int opcao = scanner.nextInt() - 1;
+        scanner.nextLine();
+
+        if (opcao < 0 || opcao >= eventos.size()) {
+            System.out.println("Evento inválido.");
+            return;
+        }
+
+        Evento evento = eventos.get(opcao);
+
+        List<Participante> participantes = evento.getParticipantes();
+
+        if (participantes.isEmpty()) {
+            System.out.println("Nenhum participante inscrito neste evento.");
+        } else {
+            System.out.println("Lista de participantes do evento " + evento.getNome() + ":");
+            for (Participante participante : participantes) {
+                System.out.println("Nome: " + participante.getNome() + " | Email: " + participante.getEmail() + " | Tipo: " + participante.getTipo());
+            }
+        }
+    }
+
+    public static void listarParticipantesVIPEvento() {
+        if (eventos.isEmpty()) {
+            System.out.println("Nenhum evento cadastrado.");
+            return;
+        }
+
+        System.out.println("Escolha o evento para listar os participantes VIP:");
+        for (int i = 0; i < eventos.size(); i++) {
+            System.out.println((i + 1) + ". " + eventos.get(i).getNome());
+        }
+
+        int opcao = scanner.nextInt() - 1;
+        scanner.nextLine();
+
+        if (opcao < 0 || opcao >= eventos.size()) {
+            System.out.println("Evento inválido.");
+            return;
+        }
+
+        Evento evento = eventos.get(opcao);
+
+        List<Participante> participantesVIP = new ArrayList<>();
+        for (Participante participante : evento.getParticipantes()) {
+            if (participante.getTipo() == Participante.TipoParticipante.VIP) {
+                participantesVIP.add(participante);
+            }
+        }
+
+        if (participantesVIP.isEmpty()) {
+            System.out.println("Nenhum participante VIP inscrito neste evento.");
+        } else {
+            System.out.println("Lista de participantes VIP do evento " + evento.getNome() + ":");
+            for (Participante participanteVIP : participantesVIP) {
+                System.out.println("Nome: " + participanteVIP.getNome() + " | Email: " + participanteVIP.getEmail());
             }
         }
     }
