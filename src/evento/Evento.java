@@ -3,7 +3,6 @@ package evento;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import participante.Participante;
 
 public class Evento {
@@ -12,58 +11,56 @@ public class Evento {
     private String local;
     private int capacidadeMaxima;
     private List<Participante> participantes;
+    private String organizador;
+    private TipoEvento tipoEvento;
 
-    public Evento(String nome, Date data, String local, int capacidadeMaxima) {
+    public enum TipoEvento {
+        WorkShop, Palestra
+    }
+
+    // Construtor de Evento ajustado
+    public Evento(String nome, Date data, String local, int capacidadeMaxima, String organizador) {
         this.nome = nome;
         this.data = data;
         this.local = local;
         this.capacidadeMaxima = capacidadeMaxima;
+        this.organizador = organizador;
         this.participantes = new ArrayList<>();
-    }
-
-    public boolean adicionarParticipante(Participante participante) {
-        if (participantes.size() < capacidadeMaxima) {
-            participantes.add(participante);
-            return true;
-        } else {
-            System.out.println("Capacidade máxima atingida.");
-            return false;
-        }
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public Date getData() {
         return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
     }
 
     public String getLocal() {
         return local;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
-    }
-
     public int getCapacidadeMaxima() {
         return capacidadeMaxima;
     }
 
-    public void setCapacidadeMaxima(int capacidadeMaxima) {
-        this.capacidadeMaxima = capacidadeMaxima;
+    public String getOrganizador() {
+        return organizador;
+    }
+
+    public void setOrganizador(String organizador) {
+        this.organizador = organizador;
     }
 
     public List<Participante> getParticipantes() {
         return participantes;
+    }
+
+    public void adicionarParticipante(Participante participante) {
+        if (participantes.size() < capacidadeMaxima) {
+            participantes.add(participante);
+        } else {
+            System.out.println("Capacidade máxima atingida.");
+        }
     }
 }

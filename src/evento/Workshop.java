@@ -9,7 +9,7 @@ public class Workshop extends Evento {
     private int cargaHoraria;
 
     public Workshop(String nome, Date data, String local, int capacidadeMaxima, String instrutor, List<String> materiaisNecessarios, int cargaHoraria) {
-        super(nome, data, local, capacidadeMaxima);
+        super(nome, data, local, capacidadeMaxima, instrutor);
         this.instrutor = instrutor;
         this.materiaisNecessarios = materiaisNecessarios;
         this.cargaHoraria = cargaHoraria;
